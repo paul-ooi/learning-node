@@ -1,0 +1,20 @@
+var fs = require('fs'); //ACCESS THE FILE SYSTEM BUILT WITHIN NODE
+
+//READ A FILE FROM THE FILE SYSTEM
+//FIRST, CREATE THE FILE data.json SO WE CAN READ FROM THIS
+
+// fs.readFile('./data.json', function(err, data) {
+//     console.log(data);
+// }); //WHEN RUN IN NODE, THIS PROVIDES A BUFFER BEFORE THE FILE, DUE TO THE MISSING FILE FORMAT TYPE (UTF-8)
+
+//NOTICE A NEW WAY OF CALLING A CALLBACK FUNCTION WITHOUT THE WORD FUNCTION, BUT USING THE ARROW SYBMOL =>
+fs.readFile('./data.json', 'utf-8', (err, data) => {
+    //TO CONVERT THE data OUTPUT USING readFile, THE INFORMATION NEEDS TO BE PARSED AS JSON
+    var data = JSON.parse(data);//JSON.parse TAKES THE DATA PARAMETER PASSED FROM THE CALLBACK FUNCTION
+    console.log(data.name);//NOW THIS CAN ACCESS THE NAME PROPERTY OF THE JSON OBJECT 
+    console.log(data);//THIS ALONE WITHOUT json.parse WILL JUST BE A STRING
+});
+
+var data = require('./data.json');
+console.log(data);//THIS OUTPUT IN THE CONSOLE IS DIFFERENT IN APPEARANCE
+console.log(data.name); //BUT IS ACCESSIBLE AS AN OBJECT WITH DOT NOTATION
