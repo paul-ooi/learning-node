@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Webpack App</title>
     </head>
     <body>
@@ -11,19 +12,21 @@
             <div class="wrapper" x-data="{
                 open: true,
                 name: 'john',
-                selectedName: null
+                selectedName: 'Select an Option'
             }">
                 <div class=select__wrapper>
-                    <span class="selected"><span class="flag">Flag</span> <span id="seclectTitle">TEXT</span></span><button @click="open = true">&gt;</button>
+                    <template x-if="null !== selectedName"><span class="selected" x-text='selectedName'></span></template>
+                    <button @click="open = true" aria-label="toggle list">&gt;</button>
                 </div>
                 <div>
-                    <ul
+                    <ul class="list"
                     x-show="open"
                     @click.away="open = false"
+                    @click="selectedName = updateSelected($event)"
                     >
-                        <li><input type="radio" name="item" id="item1" checked><label for="item1">Item1</label></li>
+                        <li ><input type="radio" name="item" id="item1" ><label for="item1">Item1</label></li>
                         <li><input type="radio" name="item" id="item2"><label for="item2">Item2</label></li>
-                        <li><input type="radio" name="item" id="item3"><label for="item3">Item3</label></li>
+                        <li ><input type="radio" name="item" id="item3"><label for="item3">Item3</label></li>
                     </ul>
                 </div>
                 <div x-ref="foo"></div><button x-on:click="$refs.foo.innerText = 'bar'"></button>

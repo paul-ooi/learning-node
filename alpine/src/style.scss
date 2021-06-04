@@ -26,3 +26,15 @@ input[type="radio"] {
 -o-appearance: none;
 appearance: none;
 }
+
+li {
+    outline: 1px solid red;
+}
+
+label {
+    outline: 1px solid blue;
+}
+
+ul {
+    outline: 1px solid green;
+}

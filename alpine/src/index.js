@@ -1,16 +1,11 @@
 import 'alpinejs';
 import './style.scss';
 
-document.addEventListener('DOMContentLoaded', ()=>{
-
-    let app = document.querySelector('#app');
-    
-    let options = app.querySelectorAll('input[name="item"]');
-    options.forEach( (option) =>{
-        option.addEventListener('click', (e)=>{
-            console.log(app.querySelector('input[name="item"]:checked ~ label').textContent)
-                document.querySelector('#seclectTitle').textContent = app.querySelector('input[name="item"]:checked ~ label').textContent;
-            
-        })
-    })
-})
+window.updateSelected = function( e ) {
+    Array.from(e.target.closest('ul').querySelectorAll('input')).forEach((input)=>{
+        input.removeAttribute('checked'); // remove the old checked
+        console.log(input)
+    });
+    e.target.closest('li').querySelector('input').toggleAttribute('checked');
+    return e.target.closest('li').textContent;
+}
