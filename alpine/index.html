@@ -16,7 +16,7 @@
             }">
                 <div class=select__wrapper>
                     <template x-if="null !== selectedName"><span class="selected" x-text='selectedName'></span></template>
-                    <button @click="open = true" aria-label="toggle list">&gt;</button>
+                    <button @click="open = true" x-bind:aria-expanded="open" aria-label="toggle list"><span class="chevron"></span></button>
                 </div>
                 <div>
                     <ul class="list"
