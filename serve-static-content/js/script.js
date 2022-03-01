@@ -1,3 +1,4 @@
+var socket = io();
 $(() => {//Shorthand for the Document ready function
     //TARGET SEND BUTTON ON CLICK and CALL THE ADD MESSASGES FUNCTION
     $('#send').click(() => {
@@ -8,9 +9,17 @@ $(() => {//Shorthand for the Document ready function
         //     message: "hello there"
         // });
 
+        //AFTER CREATING THE postMessage FUNCTION AND SERVER OPERATIONS IN server.js LINK THE FUNCTIONALITY TO THE BUTTON
+        var message = {
+            name : $('#name').val(),
+            message : $('#message').val()
+        };
+        postMessage(message);
     })
     getMessages();
 })
+
+socket.on('message', addMessages);// LISTENER FOR THE 'message' EVENT
 
 /**
  * addMessages - v1.0
@@ -42,3 +51,15 @@ function getMessages() {
             data.forEach(addMessages)
         })
 }
+
+/**
+ * POST MESSAGES TO THE /messages ROUTE
+ * @param {*} message 
+ */
+function postMessage(message) {
+    $.post('http://localhost:3000/messages', message);
+}
+
+/**
+ * REFRESH THE MESSAGES DIV
+ */
